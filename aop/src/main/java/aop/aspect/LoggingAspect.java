@@ -1,4 +1,4 @@
-package com.aop.aspect;
+package aop.aspect;
 
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.After;
@@ -13,21 +13,26 @@ import java.util.Arrays;
 @Aspect
 public class LoggingAspect {
 
-    @Before("within(com.aop.target.*)")
+    @Before("within(aop.target.*)")
     public void logBefore(JoinPoint joinPoint){
         System.out.println(String.format("Before Method: %s", joinPoint.getSignature().getName()));
         System.out.println(String.format("Args are: %s", Arrays.toString(joinPoint.getArgs())));
     }
 
-    @After("within(com.aop.target.*)")
+    @Before("execution(public int aop.target.CalculatorService.sum(int, int))")
+    public void logBeforeSpecificMethod(JoinPoint joinPoint){
+        System.out.println(String.format("Before Method: %s", joinPoint.getSignature().getName()));
+        System.out.println(String.format("Args are: %s", Arrays.toString(joinPoint.getArgs())));
+    }
+
+    @After("within(aop.target.*)")
     public void logAfter(JoinPoint joinPoint){
         System.out.println(String.format("After Method: %s", joinPoint.getSignature().getName()));
     }
 
-    @AfterReturning(pointcut = "within(com.aop.target.*)", returning = "result")
+    @AfterReturning(pointcut = "within(aop.target.*)", returning = "result")
     public void logAfterReturning(JoinPoint joinPoint, Object result){
         System.out.println(String.format("After Returning Method: %s", joinPoint.getSignature().getName()));
         System.out.println(String.format("Result: %s", result));
     }
-
 }

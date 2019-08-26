@@ -18,6 +18,7 @@
 
     <modules>
         <module>aop</module>
+		<module>transaction</module>
     </modules>
 	
     <dependencies>
@@ -98,7 +99,8 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>${maven-compiler.version}</version>
                 <configuration>
-					<release>${java.version}</release>
+					<source>${java.version}</source>
+					<target>${java.version}</target>
                 </configuration>
             </plugin>
 			<plugin>
